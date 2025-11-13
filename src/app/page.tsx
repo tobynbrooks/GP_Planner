@@ -15,7 +15,12 @@ export default function GpCalculator() {
 
   // Update forecast whenever inputs change
   useEffect(() => {
-    const result = forecastGrossProfit(inputs);
+    // Convert efficiency from percentage to model format (divide by 10)
+    const modelInputs: GpInputs = {
+      ...inputs,
+      efficiency: inputs.efficiency / 10,
+    };
+    const result = forecastGrossProfit(modelInputs);
     setForecast(result);
   }, [inputs]);
 
@@ -27,16 +32,23 @@ export default function GpCalculator() {
     }));
   };
 
+  // Check if all inputs are filled
+  const allInputsFilled = 
+    inputs.bookings > 0 &&
+    inputs.hoursAvailable > 0 &&
+    inputs.efficiency > 0 &&
+    inputs.rate > 0;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-slate-800 mb-3">
-            GP Weekly Predictor
+            Eastleigh GP Weekly Predictor
           </h1>
           <p className="text-slate-600 text-lg">
-            This data will explain 87% of what will happen in the branch this week
+            This data will explain 83% of what will happen in the branch this week
           </p>
         </div>
 
@@ -48,7 +60,7 @@ export default function GpCalculator() {
               htmlFor="bookings"
               className="block text-sm font-semibold text-slate-700 mb-2"
             >
-              Bookings
+              Bookings From 3 Weeks earlier
             </label>
             <input
               id="bookings"
@@ -84,7 +96,7 @@ export default function GpCalculator() {
               htmlFor="efficiency"
               className="block text-sm font-semibold text-slate-700 mb-2"
             >
-              Efficiency (as decimal, e.g., 0.82 for 82%)
+              Efficiency (%)
             </label>
             <input
               id="efficiency"
@@ -93,7 +105,7 @@ export default function GpCalculator() {
               value={inputs.efficiency || ''}
               onChange={(e) => handleInputChange('efficiency', e.target.value)}
               className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Enter efficiency (e.g., 0.82)"
+              placeholder="Enter efficiency as percentage (e.g., 56.4)"
             />
           </div>
 
@@ -121,12 +133,18 @@ export default function GpCalculator() {
           <p className="text-sm font-semibold text-slate-600 mb-2 text-center">
             Forecast Gross Profit
           </p>
-          <p className="text-5xl font-bold text-center text-blue-600">
-            £{forecast.toLocaleString('en-GB', {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0
-            })}
-          </p>
+          {allInputsFilled ? (
+            <p className="text-5xl font-bold text-center text-blue-600">
+              £{forecast.toLocaleString('en-GB', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+              })}
+            </p>
+          ) : (
+            <p className="text-5xl font-bold text-center text-slate-300">
+              —
+            </p>
+          )}
         </div>
       </div>
     </div>

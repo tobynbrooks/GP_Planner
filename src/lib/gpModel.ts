@@ -1,7 +1,7 @@
 export interface GpInputs {
   bookings: number;
   hoursAvailable: number;
-  efficiency: number; // decimal e.g., 0.84
+  efficiency: number; // decimal (e.g., 0.564 for 56.4%)
   rate: number;
 }
 
