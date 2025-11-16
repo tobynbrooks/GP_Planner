@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { forecastGrossProfit, GpInputs } from '@/lib/gpModel';
+import { forecastGrossProfit, GpInputs } from '@/lib/gpModelTotton';
 import { NavSelectNative } from '@/components/NavSelectNative';
 import { NAV_ITEMS } from '@/config/navItems';
 import { CompanyLogo } from '@/components/CompanyLogo';
 
-export default function GpCalculator() {
+export default function TottonGpCalculator() {
   const [inputs, setInputs] = useState<GpInputs>({
     bookings: 0,
     hoursAvailable: 0,
@@ -21,7 +21,7 @@ export default function GpCalculator() {
     // Convert efficiency from percentage to model format (divide by 10)
     const modelInputs: GpInputs = {
       ...inputs,
-      efficiency: inputs.efficiency / 10,
+      efficiency: inputs.efficiency / 1,
     };
     const result = forecastGrossProfit(modelInputs);
     setForecast(result);
@@ -42,22 +42,22 @@ export default function GpCalculator() {
     inputs.efficiency > 0 &&
     inputs.rate > 0;
 
-    return (
-      <div className="min-h-screen flex items-center justify-center p-6 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-indigo-200 via-sky-100 to-fuchsia-200">
-        <div className="w-full max-w-2xl rounded-3xl border border-white/40 bg-white/30 p-10 shadow-[0_10px_40px_rgba(0,0,0,0.08)] backdrop-blur-2xl">
-          {/* Header */}
-          <div className="text-center mb-10">
-            <div className="mx-auto mb-6 h-32 w-32 overflow-hidden rounded-md border border-black/10 bg-white/80 shadow-sm ring-1 ring-black/5">
-              <CompanyLogo className="h-full w-full object-cover" width={64} />
-            </div>
-            <h1 className="text-4xl font-bold text-slate-800 mb-3">
-              Eastleigh GP Weekly Predictor
-            </h1>
-            <p className="text-slate-700 text-base">
-            This data will explain <span className="text-blue-600 font-bold text-lg">83%</span> of what will happen this week
-            </p>
-            
+  return (
+    <div className="min-h-screen flex items-center justify-center p-6 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-indigo-200 via-sky-100 to-fuchsia-200">
+      <div className="w-full max-w-2xl rounded-3xl border border-white/40 bg-white/30 p-10 shadow-[0_10px_40px_rgba(0,0,0,0.08)] backdrop-blur-2xl">
+        {/* Header */}
+        <div className="text-center mb-10">
+          <div className="mx-auto mb-6 h-32 w-32 overflow-hidden rounded-md border border-black/10 bg-white/80 shadow-sm ring-1 ring-black/5">
+            <CompanyLogo className="h-full w-full object-cover" width={64} />
           </div>
+          <h1 className="text-4xl font-bold text-slate-800 mb-3">
+            Totton GP Weekly Predictor
+          </h1>
+          <p className="text-slate-700 text-base">
+          This data will explain <span className="text-blue-600 font-bold text-lg">91%</span> of what will happen this week
+          </p>
+          
+        </div>
 
         {/* Input Form */}
         <div className="space-y-6 mb-8">
@@ -67,7 +67,7 @@ export default function GpCalculator() {
               htmlFor="bookings"
               className="block text-sm font-semibold text-slate-700 mb-2"
             >
-              Bookings From <span className="text-blue-600 font-bold text-lg">3</span> Weeks earlier
+              Bookings From <span className="text-blue-600 font-bold text-lg">2</span> Weeks earlier
             </label>
             <input
               id="bookings"
@@ -136,8 +136,8 @@ export default function GpCalculator() {
         </div>
 
         {/* Forecast Output */}
-          <div className="rounded-xl p-6 border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
-          <p className="text-slate-700 text-base mb-2 text-center">
+        <div className="rounded-xl p-6 border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+          <p className="text-sm font-semibold text-slate-600 mb-2 text-center">
             Forecast Gross Profit
           </p>
           {allInputsFilled ? (
@@ -152,6 +152,7 @@ export default function GpCalculator() {
               —
             </p>
           )}
+          
         </div>
         {/* Navigation Select under Forecast Output */}
         <div className="mt-4 flex justify-center">
@@ -161,3 +162,5 @@ export default function GpCalculator() {
     </div>
   );
 }
+
+
