@@ -103,7 +103,7 @@ export default function TottonGpCalculator() {
               htmlFor="efficiency"
               className="block text-sm font-semibold text-slate-700 mb-2"
             >
-              Efficiency (%)
+              Efficiency (%) <span className="italic">Average 77.7%</span>
             </label>
             <input
               id="efficiency"
@@ -122,7 +122,7 @@ export default function TottonGpCalculator() {
               htmlFor="rate"
               className="block text-sm font-semibold text-slate-700 mb-2"
             >
-              Rate (£/hour)
+              Rate (£/hour) <span className="italic">Average £63.90</span>
             </label>
             <input
               id="rate"

@@ -103,7 +103,7 @@ export default function GpCalculator() {
               htmlFor="efficiency"
               className="block text-sm font-semibold text-slate-700 mb-2"
             >
-              Efficiency (%)
+              Efficiency (%) <span className="italic">Average 72.3%</span>
             </label>
             <input
               id="efficiency"
@@ -122,7 +122,7 @@ export default function GpCalculator() {
               htmlFor="rate"
               className="block text-sm font-semibold text-slate-700 mb-2"
             >
-              Rate (£/hour)
+              Rate (£/hour) <span className="italic">Average £62.49</span>
             </label>
             <input
               id="rate"
